@@ -127,8 +127,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 .stack-work/
 *~
 
-{-# START_FIlE shell.nix #-}
-
+{-# START_FILE shell.nix #-}
 { nixpkgs ? import <nixpkgs> {}, compiler ? "ghc902" }:
 let
   inherit (nixpkgs) pkgs;
