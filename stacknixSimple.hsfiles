@@ -45,9 +45,7 @@ main :: undefined
 *~
 
 {-# START_FIlE shell.nix #-}
-
 #NOTE: when you change the compiler version for the shell make sure to change the stack.yaml resolver to match the ghc here version aswell.
-
 { nixpkgs ? import <nixpkgs> {}, compiler ? "ghc8107" }:
 let
   inherit (nixpkgs) pkgs;
