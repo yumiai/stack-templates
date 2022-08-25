@@ -6,13 +6,6 @@ author:              "{{author-name}}{{^author-name}}Author name here{{/author-n
 extra-source-files:
 - README.md
 
-dependencies:
-
-
-ghc-options:
-- -Wall
-- -fWarn-tabs
-
 
 executables:
   {{name}}:
@@ -30,11 +23,11 @@ main = defaultMain
 
 {-# START_FILE src/main.hs #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
+
 module main where
 
-main :: IO
-main :: undefined
+main :: IO ()
+main :: putStrLn "hello!"
 
 
 {-# START_FILE README.md #-}
@@ -44,25 +37,12 @@ main :: undefined
 .stack-work/
 *~
 
-{-# START_FILE shell.nix #-}
-{ nixpkgs ? import <nixpkgs> {}, compiler ? "ghc8107" }:
-let
-  inherit (nixpkgs) pkgs;
-  ghc = pkgs.haskell.packages.${compiler};
-in
-pkgs.stdenv.mkDerivation {
-  name = "my-haskell-env-0";
-  buildInputs = [ ghc ];
-  shellHook = "eval $(egrep ^export ${ghc}/bin/ghc)";
-}
-#NOTE: when you change the compiler version for the shell make sure to change the stack.yaml resolver to match the ghc version in this file aswell.
-
 {-# START_FILE stack.yaml #-}
 resolver: lts-18.28
 # Install the ghc with other libraries. You can use the 'nix.shell' aslo make sure to put in the lines 'ghcWithPackages (pkgs: [pkgs.mtl]) after the ${compiler}'
 # in the 'ghc' variable
-packages: [zlib mtl]
+packages:
+  - .
 nix:
   enable: true
   pure: false
-  shell-file: shell.nix
