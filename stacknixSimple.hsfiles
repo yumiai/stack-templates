@@ -44,3 +44,4 @@ packages:
 nix:
   enable: true
   pure: false
+  packages: [ zlib pkgconfig zeromq ]
